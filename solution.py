@@ -10,9 +10,8 @@ chat_id = 433242632 # Ваш chat ID, не меняйте название пе�
 
 
 def solution(p: float, x: np.ndarray) -> tuple:
-  b = np.max(x) / (1 - p) - 0.056 / (1 - p)
-    return b
-# lower_bound = np.min(x)
-# loc = lower_bound + (1 - p) * (np.max(x) - lower_bound)
-# scale = (np.max(x) - lower_bound) / np.sqrt(12)
-# return loc - scale, loc + scale
+    alpha = 1 - p
+    loc = np.min(x) + (np.max(x) - np.min(x)) / 2  
+    scale = (np.max(x) - np.min(x)) / np.sqrt(12) 
+    return loc - scale * uniform.ppf(1 - alpha / 2), \
+           loc - scale * uniform.ppf(alpha / 2)
